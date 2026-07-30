@@ -149,7 +149,7 @@ export default async function ContactPage() {
 
         {/* Google Maps Embed */}
         <div className="lg:col-span-7 bg-white p-4 rounded-3xl border border-slate-200 shadow-xs flex flex-col h-full min-h-[400px]">
-          <h3 className="text-base font-bold text-slate-900 mb-3 px-2">Peta Lokasi Studio (Jambi)</h3>
+          <h3 className="text-base font-bold text-slate-900 mb-3 px-2">Peta Lokasi (Jambi)</h3>
           <div className="w-full h-full rounded-2xl overflow-hidden bg-slate-100 min-h-[380px]">
             <iframe
               title="Google Maps Location"
