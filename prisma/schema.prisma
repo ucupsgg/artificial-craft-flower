@@ -1,6 +1,7 @@
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -125,12 +126,12 @@ model WebsiteSetting {
   heroTitle    String   @default("Rangkaian Bunga Artificial Premium & Elegan")
   heroSubtitle String   @default("Abadikan momen indah dengan bucket bunga kustom berkualitas tinggi yang tahan selamanya.")
   aboutText    String   @default("Artificial Craft Flower menghadirkan keindahan bunga buatan tangan terbaik untuk momen spesial Anda.")
-  address      String?  @default("Jakarta, Indonesia")
-  whatsapp     String   @default("6281234567890")
-  email        String?  @default("info@artificialcraftflower.com")
-  instagram    String?  @default("https://instagram.com/artificialcraftflower")
-  tiktok       String?  @default("https://tiktok.com/@artificialcraftflower")
-  facebook     String?  @default("https://facebook.com/artificialcraftflower")
+  address      String?  @default("Tambak Sari, Kec. Jambi Sel., Kota Jambi, Jambi")
+  whatsapp     String   @default("6281617621150")
+  email        String?  @default("waty2008@gmail.com")
+  instagram    String?  @default("")
+  tiktok       String?  @default("")
+  facebook     String?  @default("")
   googleMaps   String?  @default("https://maps.google.com")
   footerText   String?  @default("© 2026 Artificial Craft Flower. All rights reserved.")
   updatedAt    DateTime @updatedAt
