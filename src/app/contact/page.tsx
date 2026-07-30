@@ -18,9 +18,21 @@ export default async function ContactPage() {
   const instagram = setting?.instagram || '';
   const tiktok = setting?.tiktok || '';
   const facebook = setting?.facebook || '';
-  const mapsUrl =
-    setting?.googleMaps ||
-    `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15951.350172675865!2d103.624812!3d-1.613089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e2588c8868df59f%3A0x86bb6be6b8e8f813!2sTambak%20Sari%2C%20Kec.%20Jambi%20Sel.%2C%20Kota%20Jambi%2C%20Jambi!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid`;
+  let rawMapsUrl = setting?.googleMaps || '';
+  
+  // Smart Google Maps Embed formatter:
+  let mapsUrl = `https://maps.google.com/maps?q=-1.613065,103.624808&z=15&output=embed`;
+  
+  if (rawMapsUrl) {
+    if (rawMapsUrl.includes('google.com/maps/embed')) {
+      mapsUrl = rawMapsUrl;
+    } else if (rawMapsUrl.includes('maps.app.goo.gl') || rawMapsUrl.includes('goo.gl/maps')) {
+      // Use fallback coordinates embed for short link
+      mapsUrl = `https://maps.google.com/maps?q=-1.613065,103.624808&z=15&output=embed`;
+    } else if (rawMapsUrl.startsWith('http')) {
+      mapsUrl = rawMapsUrl;
+    }
+  }
 
   const waLink = `https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
     'Halo Artificial Craft Flower 🌸 Saya ingin bertanya atau berkonsultasi pemesanan.'

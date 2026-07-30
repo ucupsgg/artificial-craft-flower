@@ -173,6 +173,17 @@ export default function SettingsClient({ initialSetting }: SettingsClientProps) 
               />
             </div>
           </div>
+
+          <div>
+            <label className="text-xs font-bold text-slate-300 block mb-1">URL / Embed Iframe Google Maps (Peta Studio)</label>
+            <input
+              type="text"
+              value={googleMaps}
+              onChange={(e) => setGoogleMaps(e.target.value)}
+              placeholder="https://www.google.com/maps/embed?pb=... atau https://maps.app.goo.gl/..."
+              className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:ring-2 focus:ring-rose-500"
+            />
+          </div>
         </div>
       </div>
 
