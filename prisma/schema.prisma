@@ -1,0 +1,137 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Size {
+  id           String        @id @default(cuid())
+  name         String
+  priceAdjust  Float         @default(0)
+  productSizes ProductSize[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Product {
+  id             String         @id @default(cuid())
+  name           String
+  slug           String         @unique
+  description    String?
+  price          Float
+  discountPrice  Float?
+  isDiscount     Boolean        @default(false)
+  isBestSeller   Boolean        @default(false)
+  isFeatured     Boolean        @default(false)
+  isPromo        Boolean        @default(false)
+  status         Boolean        @default(true)
+  seoTitle       String?
+  seoDescription String?
+  categoryId     String
+  category       Category       @relation(fields: [categoryId], references: [id])
+  images         ProductImage[]
+  sizes          ProductSize[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  url       String
+  isPrimary Boolean  @default(false)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model ProductSize {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sizeId    String
+  size      Size    @relation(fields: [sizeId], references: [id], onDelete: Cascade)
+}
+
+model Banner {
+  id        String   @id @default(cuid())
+  title     String
+  subtitle  String?
+  image     String
+  link      String?
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Gallery {
+  id        String   @id @default(cuid())
+  title     String
+  image     String
+  category  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String?
+  content   String
+  rating    Int      @default(5)
+  avatar    String?
+  status    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FAQ {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WebsiteSetting {
+  id           String   @id @default("default")
+  siteName     String   @default("Artificial Craft Flower")
+  logo         String?
+  favicon      String?
+  heroTitle    String   @default("Rangkaian Bunga Artificial Premium & Elegan")
+  heroSubtitle String   @default("Abadikan momen indah dengan bucket bunga kustom berkualitas tinggi yang tahan selamanya.")
+  aboutText    String   @default("Artificial Craft Flower menghadirkan keindahan bunga buatan tangan terbaik untuk momen spesial Anda.")
+  address      String?  @default("Jakarta, Indonesia")
+  whatsapp     String   @default("6281234567890")
+  email        String?  @default("info@artificialcraftflower.com")
+  instagram    String?  @default("https://instagram.com/artificialcraftflower")
+  tiktok       String?  @default("https://tiktok.com/@artificialcraftflower")
+  facebook     String?  @default("https://facebook.com/artificialcraftflower")
+  googleMaps   String?  @default("https://maps.google.com")
+  footerText   String?  @default("© 2026 Artificial Craft Flower. All rights reserved.")
+  updatedAt    DateTime @updatedAt
+}
