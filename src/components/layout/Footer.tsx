@@ -20,7 +20,7 @@ export default function Footer({ setting }: FooterProps) {
   const siteName = setting?.siteName || 'Artificial Craft Flower';
   const whatsapp = setting?.whatsapp || '6281617621150';
   const email = setting?.email || 'waty2008@gmail.com';
-  const address = setting?.address || 'Tambak Sari, Kec. Jambi Sel., Kota Jambi, Jambi';
+  const address = setting?.address || '67 Jl. Kutilang III, Tambak Sari, Kec. Jambi Sel., Kota Jambi, Jambi';
   const instagram = setting?.instagram ?? '';
   const tiktok = setting?.tiktok ?? '';
   const facebook = setting?.facebook ?? '';
